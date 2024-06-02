@@ -1,0 +1,121 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  /* background: #2d4967; */
+  /* color: #f1b8fb; */
+}
+
+.wrapper{
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+  height: 100vh;
+}
+
+@media screen and (max-width: 576px) {
+  .wrapper{
+    grid-template-columns: repeat(1, 1fr);
+    /* grid-template-rows: 5fr 2fr; */
+  }
+}
+
+canvas {
+  touch-action: none;
+  /* background: #dcb0b0; */
+}
+
+
+
+.overlay {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #1d1c1c6f;
+}
+
+.container {
+  height: fit-content;
+  position: absolute;
+  bottom:  5%;
+  /* background-color: #e34545; */
+  right: 50px;
+  /* height: 59px; */
+  /* transform: translate(30%, 50%); */
+  /* width: 400px; */
+  /* border: 4px solid tomato; */
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* backdrop-filter: blur(12px); */
+}
+
+@media screen and (max-width: 576px) {
+  .container{
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 15%;
+  }
+
+}
+
+/* .input{
+  border: 2px solid green;
+  height: 25px;
+} */
+.container input[type='file'] {
+  display: none
+}
+
+/* Style the label to look like a button */
+.custum-file-upload {
+  height: 80px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ec83fe;
+  background-color: #0082fc6c;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.custum-file-upload .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .icon svg {
+  height: 40px;
+  fill: #000000;
+}
+
+.custum-file-upload .text {
+  /* border: 4px solid black;  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .text span {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+}
+
+@media screen and (max-width: 576px) {
+  .custum-file-upload .text span {
+    font-size: 12px;
+    font-weight: 500;
+  }
+}
