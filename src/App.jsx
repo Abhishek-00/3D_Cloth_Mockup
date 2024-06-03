@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
-import { Bloom, DepthOfField, EffectComposer, Vignette } from "@react-three/postprocessing";
-import { useControls } from "leva";
+// import { Bloom, DepthOfField, EffectComposer, Vignette } from "@react-three/postprocessing";
+// import { useControls } from "leva";
 import { Loader, useProgress } from "@react-three/drei";
 import { Suspense, useState } from "react";
 import { Leva } from 'leva';
@@ -13,8 +13,6 @@ import { setImage } from "./redux/slices/imageUploadSlice";
 function App() {
 
   const dispatch = useDispatch();
-
-  const canvasRef = useRef(null);
 
   const [previousPreview, setPreviousPreview] = useState(null);
 
@@ -51,7 +49,7 @@ function App() {
       img.onload = () => {
         const width = img.width;
         const height = img.height;
-        console.log('Image uploaded & set height, width', width, height);
+        // console.log('Image uploaded & set height, width', width, height);
 
         // Revoke previous preview URL to clean up memory
         if (previousPreview) {
@@ -81,10 +79,7 @@ function App() {
       <div className="wrapper">
         <div>
           <Canvas
-            // gl={{ preserveDrawingBuffer: true }}
-            // dpr={1.5}
             id="canvas"
-            // ref={canvasRef}
             shadows
             camera={{
               fov: 45,
@@ -92,27 +87,26 @@ function App() {
               near: 0.1,
               far: 2000,
             }}>
-            {/* <color attach="background" args={["#f1b8fb"]} /> */}
             <Suspense fallback={null}>
               <Experience />
 
               {/* <EffectComposer>
-            <DepthOfField
-              focusDistance={focalDistance}
-              focalLength={focalLength}
-              bokehScale={bokehScale}
-              height={Height}
-            />
-            <Bloom
-              mipmapBlur
-              luminanceThreshold={1}
-              intensity={2.4}
-            />
-            <Vignette
-              offset={0.4}
-              darkness={0.7}
-            />
-          </EffectComposer> */}
+                <DepthOfField
+                  focusDistance={focalDistance}
+                  focalLength={focalLength}
+                  bokehScale={bokehScale}
+                  height={Height}
+                />
+                <Bloom
+                  mipmapBlur
+                  luminanceThreshold={1}
+                  intensity={2.4}
+                />
+                <Vignette
+                  offset={0.4}
+                  darkness={0.7}
+                />
+              </EffectComposer> */}
             </Suspense>
           </Canvas>
           <Loader />

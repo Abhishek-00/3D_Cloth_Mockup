@@ -1,95 +1,11 @@
-
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useGLTF, useTexture, Decal, PresentationControls, } from '@react-three/drei'
-import { useControls, folder } from 'leva'
+import { useControls } from 'leva'
 import { useSelector } from "react-redux";
 import { getImageSelector } from '../redux/slices/imageUploadSlice';
 
 export function Hoodie(props) {
-
-    const selectImage = useSelector(state => state.image.image)
-    const [height, setHeight] = useState(useSelector((state) => state.image.height))
-    const [width, setWidth] = useState(useSelector((state) => state.image.width))
-
     const { nodes, materials } = useGLTF('/models/printable hoodie black.glb')
-
-    console.log('function loaded ', width, height)
-
-
-
-
-
-
-
-
-
-    const [set] = useControls(() => ({
-        // angle_x: {
-        //     min: 0,
-        //     max: Math.PI * 2,
-        //     value: 4.69,
-        //     step: 0.01,
-        //     onChange: (value) => {
-        //         setRotation((rot) => [value, rotation[1], rotation[2]])
-        //     }
-        // },
-        // angle_y: {
-        //     min: 0,
-        //     max: Math.PI * 2,
-        //     value: 0,
-        //     step: 0.01,
-        //     onChange: (value) => {
-        //         setRotation((rot) => [rotation[0], value, rotation[2]])
-        //     }
-        // },
-
-        // position_y: {
-        //     min: -30,
-        //     max: 30,
-        //     value: 16.97,
-        //     step: 0.001,
-        //     onChange: (value) => {
-        //         setPos((pos) => [pos[0], value, pos[2]]);
-        //     }
-        // },
-        // position_z: {
-        //     min: -30,
-        //     max: 30,
-        //     value: -12.34,
-        //     step: 0.001,
-        //     onChange: (value) => {
-        //         setPos((pos) => [pos[0], pos[1], value]);
-        //     }
-        // },
-        // scale: {
-        //     min: 0,
-        //     max: 4,
-        //     value: 1,
-        //     step: 0.00001,
-        //     onChange: (value) => {
-        //         // dispatch({
-        //         //     type: SET_SCALE,
-        //         //     payload: {
-        //         //         imgHeight: height,
-        //         //         imgWidth: width,
-        //         //         scaleValue: value * 100,
-        //         //     }
-        //         // })
-        //         console.log(curWidth);
-        //         setScale([(curWidth / 100) * value, (curHeight / 100) * value, 38.92]);
-        //     }
-        // },
-        // scale_z: {
-        //     min: 10,
-        //     max: 50,
-        //     value: 38.92,
-        //     step: 0.001,
-        //     onChange: (value) => {
-        //         // setScale((scl) => [scl[0], scl[1], value]);
-        //     }
-        // },
-
-    }))
 
     return (
         <>
@@ -157,7 +73,7 @@ const PrintableMaterialFront = () => {
     const uploadedImage = useSelector(getImageSelector)
     const { image, height, width } = useSelector(getImageSelector)
     const texture = useTexture(image)
-    console.log("image ", uploadedImage);
+    // console.log("image ", uploadedImage);
 
     const [pos, setPos] = useState([9.21, 16.97, -12.34])
     const [rotation, setRotation] = useState([4.69, 0, 0])
@@ -165,8 +81,8 @@ const PrintableMaterialFront = () => {
 
 
     const { scale } = useControls('Image Transformation', ({
-        angle_z: {
-            min: 0, 
+        Rotate: {
+            min: 0,
             max: Math.PI * 2,
             value: 0,
             step: 0.01,
@@ -174,7 +90,7 @@ const PrintableMaterialFront = () => {
                 setRotation((rot) => [rotation[0], rotation[1], value])
             }
         },
-        position_x: {
+        'X-axis': {
             min: -30,
             max: 30,
             value: 9.21,
@@ -183,7 +99,7 @@ const PrintableMaterialFront = () => {
                 setPos((pos) => [value, pos[1], pos[2]]);
             }
         },
-        position_z: {
+        'Y-axis': {
             min: -30,
             max: 30,
             value: -12.34,

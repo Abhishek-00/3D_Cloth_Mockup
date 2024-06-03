@@ -1,21 +1,17 @@
 import { useRef, useState, useMemo, useEffect } from "react";
-import { OrbitControls, Decal, useTexture, Environment, Sparkles, ContactShadows, Float, PresentationControls } from "@react-three/drei";
-import * as THREE from 'three'
+import {  Environment, Sparkles, ContactShadows, Float } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { Tshirt } from './Tshirt'
 import { Hoodie } from "./Hoodie";
 import { useControls, button } from "leva";
-import { LayerMaterial, Depth } from 'lamina'
-import { useFrame } from "@react-three/fiber";
-import { Noise } from "@react-three/postprocessing";
-import { Color } from "lamina/vanilla";
+// import { LayerMaterial, Depth } from 'lamina'
+// import { useFrame } from "@react-three/fiber";
+// import { Color } from "lamina/vanilla";
 
 
 
-const BG_SPEED = 0.3
+// const BG_SPEED = 0.3
 
 export const Experience = () => {
-  const [setshowSparkles, setSetshowSparkles] = useState(true)
   const [position, setPosition] = useState([- 0.1, -0.1, 0.1])
 
 
@@ -28,7 +24,7 @@ export const Experience = () => {
       try {
         // Render the scene
         gl.render(scene, camera);
-        console.log(camera.position);
+        // console.log(camera.position);
 
         // Create a download link
         const link = document.createElement('a');
@@ -51,11 +47,11 @@ export const Experience = () => {
     {
       Background: false,
       'Download Image': button(async () => {
-        setSetshowSparkles(false)
         try {
           await download();
 
         } catch (error) {
+          alert("Screenshot download failed:");
           console.error("Screenshot download failed:", error);
         }
       }),
@@ -91,7 +87,6 @@ export const Experience = () => {
 
   if (downloadOptions.Background) {
     const canvas = document.getElementById('canvas');
-    console.log(canvas);
     canvas.style.backgroundColor = _color;
   } else {
     const canvas = document.getElementById('canvas');
@@ -133,52 +128,37 @@ export const Experience = () => {
     <>
 
 
-      {/* <OrbitControls /> */}
+
 
       <Float rotationIntensity={0.1} floatingRange={[-0.06, 0.05]} position={position} rotation-x={-Math.PI / 10}>
+
         <Hoodie
           // rotation-x={-Math.PI / 10}
           // position={[-0.2, -0.2, 0]}
           scale={[0.1, 0.1, 0.1]}
         />
+
       </Float>
 
-      {/* <Tshirt
-        position={[0, -1.5, 0]}
-        scale={[0.4, 0.4, 0.4]}
-      /> */}
-      {/* <mesh>
-        <sphereGeometry args={[0.5, 64, 64]} />
-        <meshNormalMaterial />
 
-        <Decal
-          debug // Makes "bounding box" of the decal visible
-          position={[0.2, 0.2, 0.2]} // Position of the decal
-          rotation={[0, 0, 0]} // Rotation of the decal (can be a vector or a degree in radians)
-          scale={[0.5, 0.5, 0.5]} // Scale of the decal
-        >
-          <meshBasicMaterial
-            map={texture}
-            polygonOffset
-            polygonOffsetFactor={-1} // The material should take precedence over the original
-          />
-        </Decal>
 
-      </mesh> */}
-      {/* <Environment debug preset="city" intensity={8159} /> */}
+
+
+
+
 
       <ambientLight intensity={1.5} />
       <spotLight debug position={[1, 4, 2]} intensity={2} angle={0.15} penumbra={1} shadow-mapSize={2048} castShadow />
 
-      {/* <ambientLight intensity={0.3} />
-      <directionalLight
+      {/* <ambientLight intensity={0.3} /> */}
+      {/* <directionalLight
         position={[4, 5, 5]}
-        intensity={1.8}
+        intensity={0.8}
         color={'#f0f8ff'}
       />
       <directionalLight
         position={[4, 5, -5]}
-        intensity={1.8}
+        intensity={0.8}
         color={'#ec83fe'}
       /> */}
 
@@ -196,25 +176,14 @@ export const Experience = () => {
       }
 
 
-      {/* <ContactShadows
-        blur={2}
-        far={10}
-        opacity={1}
-        position={[
-          0,
-          0,
-          0
-        ]}
-        resolution={1024}
-        scale={100}
-      /> */}
 
-      {/* <spotLight
+
+      <spotLight
         position={[2, 3, 4]}
         intensity={1}
         angle={0.3}
         penumbra={0.4}
-      /> */}
+      />
 
       {/* <mesh
         receiveShadow={false}
@@ -243,11 +212,7 @@ export const Experience = () => {
         </LayerMaterial>
       </mesh> */}
       <ContactShadows position={[0, - 0.4, 0]} opacity={0.4} scale={4} blur={1.5} far={4} />
-      {/* <ContactShadows
-            position-y={- 1.4}
-            opacity={0.4}
-            scale={5}
-        /> */}
+
       {
         downloadOptions.Background && (
           <color attach="background" args={[_color]} />
